@@ -6,11 +6,13 @@ const music = document.getElementById("music");
 const startOverlay = document.getElementById("start-overlay");
 const startButton = document.getElementById("start-button");
 const calculator = document.querySelector(".calculator");
+const easterEggSound = new Audio("assets/amongus.mp3");
 
 let expression = "";
 let isDragging = false;
 let dragOffsetX = 0;
 let dragOffsetY = 0;
+let equalsCount = 0;
 
 const playSound = (audio) => {
   if (!audio) return;
@@ -43,14 +45,23 @@ const sanitizeExpression = (raw) => {
 };
 
 const resolveExpression = () => {
-  const isBoom = Math.random() < 0.01;
+  const isBoom = Math.random() < 0.05;
   const result = isBoom ? "1488" : "67";
   updateDisplay(result);
   playSound(resultSound);
   if (isBoom) {
+    // Easter egg: 5% chance event
     calculator.classList.remove("calculator--boom");
     void calculator.offsetWidth;
     calculator.classList.add("calculator--boom");
+    document.body.classList.add("scary-mode");
+    document.body.style.backgroundImage = 'url("assets/lilpeep.jpg")';
+    playSound(easterEggSound);
+    music.pause();
+    setTimeout(() => {
+      calculator.style.opacity = "0";
+      calculator.style.pointerEvents = "none";
+    }, 500);
   }
 };
 
@@ -72,6 +83,7 @@ const init = () => {
   const startDragging = (event) => {
     if (event.button !== 0) return;
     if (event.target.closest(".key") || event.target.closest(".start-panel")) return;
+    event.preventDefault();
     const rect = calculator.getBoundingClientRect();
     calculator.style.left = `${rect.left}px`;
     calculator.style.top = `${rect.top}px`;
