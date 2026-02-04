@@ -19,9 +19,11 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: radial-gradient(circle at top, #1f2342, #0b0d18 60%);
+  background: url("assets/background.jpg") center/cover no-repeat fixed;
   color: var(--text);
   cursor: pointer;
+  position: relative;
+  overflow: hidden;
 }
 
 .calculator {
@@ -33,12 +35,62 @@ body {
   display: grid;
   gap: 18px;
   transition: opacity 0.3s ease, transform 0.3s ease;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  cursor: grab;
+  overflow: hidden;
 }
 
 .calculator--hidden {
   opacity: 0;
   pointer-events: none;
   transform: translateY(20px);
+}
+
+.calculator--dragging {
+  cursor: grabbing;
+}
+
+.calculator--boom {
+  animation: boom-shake 0.6s ease-in-out;
+}
+
+.calculator--boom .boom {
+  animation: boom-pulse 0.6s ease-out;
+}
+
+.boom {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle, rgba(255, 122, 24, 0.45) 0%, rgba(255, 60, 0, 0.35) 35%, rgba(0, 0, 0, 0) 70%);
+  opacity: 0;
+  pointer-events: none;
+}
+
+@keyframes boom-pulse {
+  0% {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  30% {
+    opacity: 1;
+    transform: scale(1.05);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.25);
+  }
+}
+
+@keyframes boom-shake {
+  0% { transform: translate(-50%, -50%) scale(1); }
+  20% { transform: translate(calc(-50% + 6px), calc(-50% - 6px)) scale(1.02); }
+  40% { transform: translate(calc(-50% - 6px), calc(-50% + 6px)) scale(1.01); }
+  60% { transform: translate(calc(-50% + 4px), calc(-50% + 4px)) scale(1.015); }
+  80% { transform: translate(calc(-50% - 3px), calc(-50% - 3px)) scale(1.01); }
+  100% { transform: translate(-50%, -50%) scale(1); }
 }
 
 .start-overlay {
@@ -164,4 +216,10 @@ body {
 
 .key--wide {
   grid-column: span 2;
+}
+
+.key--spacer {
+  background: transparent;
+  box-shadow: none;
+  pointer-events: none;
 }
