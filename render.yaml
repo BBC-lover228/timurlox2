@@ -1,0 +1,9 @@
+services:
+  - type: web
+    name: timurlox2
+    env: go
+    buildCommand: go build -o app
+    startCommand: ./app
+    envVars:
+      - key: PORT
+        value: $PORT

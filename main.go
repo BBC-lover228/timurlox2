@@ -14,7 +14,15 @@ import (
 	"time"
 )
 
-const addr = ":5173"
+var addr string
+
+func init() {
+	port := os.Getenv("PORT")
+	if port == "" {
+		port = "5173"
+	}
+	addr = ":" + port
+}
 
 func main() {
 	mux := http.NewServeMux()
