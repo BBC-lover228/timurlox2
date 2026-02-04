@@ -45,9 +45,11 @@ func main() {
 	}()
 
 	url := fmt.Sprintf("http://localhost%s", addr)
-	if err := openBrowser(url); err != nil {
-		log.Printf("could not open browser: %v", err)
-		log.Printf("open %s manually", url)
+	if os.Getenv("RENDER") == "" {
+		if err := openBrowser(url); err != nil {
+			log.Printf("could not open browser: %v", err)
+			log.Printf("open %s manually", url)
+		}
 	}
 
 	log.Printf("calculator running at %s (Ctrl+C to stop)", url)
