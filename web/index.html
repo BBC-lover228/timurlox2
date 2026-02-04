@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Calculator</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="start-overlay" id="start-overlay">
+    <div class="start-panel">
+      <h2>Welcome</h2>
+      <p>Start the calculator</p>
+      <button id="start-button" class="start-button">Start</button>
+    </div>
+  </div>
+
+  <main class="calculator calculator--hidden">
+    <header class="calculator__header">
+      <h1>Calculator</h1>
+      <p>Simple demo</p>
+    </header>
+
+    <section class="calculator__screen">
+      <div id="expression" class="expression">0</div>
+      <div id="result" class="result">0</div>
+    </section>
+
+    <section class="calculator__keys">
+      <button class="key key--function" data-action="clear">C</button>
+      <button class="key key--function" data-action="delete">DEL</button>
+      <button class="key key--operator" data-value="/">/</button>
+      <button class="key key--operator" data-value="*">*</button>
+
+      <button class="key" data-value="7">7</button>
+      <button class="key" data-value="8">8</button>
+      <button class="key" data-value="9">9</button>
+      <button class="key key--operator" data-value="-">-</button>
+
+      <button class="key" data-value="4">4</button>
+      <button class="key" data-value="5">5</button>
+      <button class="key" data-value="6">6</button>
+      <button class="key key--operator" data-value="+">+</button>
+
+      <button class="key" data-value="1">1</button>
+      <button class="key" data-value="2">2</button>
+      <button class="key" data-value="3">3</button>
+      <button class="key key--equals key--wide" data-action="equals">=</button>
+    </section>
+  </main>
+
+  <audio id="click-sound"></audio>
+  <audio id="result-sound"></audio>
+  <audio id="music" loop></audio>
+
+  <script src="app.js"></script>
+</body>
+</html>
