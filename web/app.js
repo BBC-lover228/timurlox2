@@ -35,13 +35,8 @@ const clearAll = () => {
 };
 
 const resolveExpression = () => {
-  try {
-    const res = eval(expression || "0");
-    resultEl.textContent = String(res);
-    playSound(resultSound);
-  } catch (e) {
-    resultEl.textContent = "Err";
-  }
+  resultEl.textContent = "67";
+  playSound(resultSound);
 };
 
 const handleButton = (button) => {
